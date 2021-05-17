@@ -1,79 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta
-            content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
-            name="viewport"
-    />
-    <title>Spring Boot WebSocket Chat Application | CalliCoder</title>
-    <link href="/css/main.css" rel="stylesheet"/>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0" name="viewport" />
+    <title>WebSocket Chat usando Spring</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
 </head>
+
 <body>
-<form id="multipleUploadForm" name="multipleUploadForm">
-    <input
-            class="file-input"
-            hidden
-            id="multipleFileUploadInput"
-            multiple
-            name="files"
-            required
-            type="file"
-    />
-</form>
-<noscript>
-    <h2>Sorry! Your browser doesn't support Javascript</h2>
-</noscript>
-
-<div id="username-page">
-    <div class="username-page-container">
-        <h1 class="title">Type your username</h1>
-        <form id="usernameForm" name="usernameForm">
-            <div class="form-group">
-                <input
-                        autocomplete="off"
-                        class="form-control"
-                        id="name"
-                        placeholder="Username"
-                        type="text"
-                />
-            </div>
-            <div class="form-group">
-                <button class="accent username-submit" type="submit">
-                    Start Chatting
-                </button>
-            </div>
+    <div class="file-loading">
+        <form id="multipleUploadForm" name="multipleUploadForm">
+            <input class="file-input" hidden id="multipleFileUploadInput" multiple name="files" required type="file" />
         </form>
     </div>
-</div>
+    <noscript>
+        <h2>Desculpe! Seu navegador não suporta Javascript</h2>
+    </noscript>
 
-<div class="hidden" id="chat-page">
-    <div class="chat-container">
-        <div class="chat-header">
-            <h2>Spring WebSocket Chat Demo</h2>
-        </div>
-        <div class="connecting">Connecting...</div>
-        <ul id="messageArea"></ul>
-        <form id="messageForm" name="messageForm">
-            <div class="form-group">
-                <div class="input-group clearfix">
-                    <label for="multipleFileUploadInput"></label>
-                    <input
-                            autocomplete="off"
-                            class="form-control"
-                            id="message"
-                            placeholder="Type a message..."
-                            type="text"
-                    />
-                    <button class="primary" type="submit">Send</button>
+    <div id="username-page">
+        <div class="username-page-container">
+            <h1 class="title">
+                Coloque o nome que você deseja que seja exibido no chat!
+            </h1>
+            <form id="usernameForm" name="usernameForm">
+                <div class="form-group">
+                    <input autocomplete="off" class="form-control" id="name" placeholder="Nome" type="text" />
                 </div>
-            </div>
-        </form>
+                <div class="form-group">
+                    <button class="accent username-submit" type="submit">
+                        Entre no chat!
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
+    <div class="hidden" id="chat-page">
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>Chat Unip</h2>
+                <h2>
+                    <a class="btn btn-primary" method="post" th:href="@{/logout}">Sair do Chat</a>
+                </h2>
+            </div>
+            <div class="connecting">Conectando ...</div>
+            <ul id="messageArea"></ul>
+            <form id="messageForm" name="messageForm">
+                <div class="form-group">
+                    <div class="input-group clearfix">
+                        <label for="multipleFileUploadInput"></label>
+                        <input autocomplete="off" class="form-control" id="message" placeholder="Digite uma mensagem..."
+                            type="text" />
+                        <button class="primary" type="submit">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script src="/js/main.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/main.js"></script>
+
 </body>
+
 </html>

@@ -1,61 +1,46 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Login</title>
-    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-    <link href="/css/common.css" rel="stylesheet"/>
+  <title>Login</title>
+  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet" />
+  <link href="/css/common.css" rel="stylesheet" />
 </head>
 
 <body>
-<div class="container">
+  <div class="container">
     <form class="form-signin" id="usernameForm" method="POST" name="usernameForm" th:action="@{/}">
-        <h3 class="form-signin-heading" th:text="Bem-Vindo"></h3>
-        <br/>
+      <h3 class="form-signin-heading" th:text="Bem-Vindo"></h3>
+      <br />
 
-        <input
-                autofocus="true"
-                class="form-control"
-                id="user_name"
-                name="user_name"
-                placeholder="User Name"
-                type="text"
-        />
-        <br/>
+      <input autofocus="true" class="form-control" id="user_name" name="user_name" placeholder="Nome do usuário"
+        type="text" />
+      <br />
 
-        <input
-                class="form-control"
-                id="senha"
-                name="senha"
-                placeholder="Senha"
-                type="password"
-        />
-        <br/>
+      <input class="form-control" id="senha" name="senha" placeholder="Senha" type="password" />
+      <br />
 
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #ff1c19">
-                Nome de usuário ou senha inválidos!
-            </p>
-        </div>
-        <button
-                class="btn btn-lg btn-primary btn-block"
-                name="Submit"
-                th:text="Login"
-                type="submit"
-                value="Login"
-        ></button>
-        <h4 class="text-center"><a method="get" th:href="@{/registration}">Create an account</a></h4>
+      <div align="center" th:if="${param.error}">
+        <p style="font-size: 20; color: #ff1c19">
+          Nome de usuário ou senha inválidos!
+        </p>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" name="Submit" th:text="Login" type="submit"
+        value="Login"></button>
+      <br />
+      <h4 class="text-center">
+        <a method="get" th:href="@{/registration}">Crie um novo usuário</a>
+      </h4>
     </form>
-</div>
+  </div>
 
-<script crossorigin="anonymous"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>

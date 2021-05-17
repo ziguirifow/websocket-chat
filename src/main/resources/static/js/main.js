@@ -2,7 +2,6 @@
 
 var fileUploadForm = document.querySelector("#multipleUploadForm");
 var fileUploadInput = document.querySelector("#multipleFileUploadInput");
-var teste = document.querySelector("#teste");
 
 var usernamePage = document.querySelector("#username-page");
 var chatPage = document.querySelector("#chat-page");

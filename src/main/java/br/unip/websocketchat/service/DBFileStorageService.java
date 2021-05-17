@@ -24,19 +24,19 @@ public class DBFileStorageService {
 
     try {
       if (fileName.contains("..")) {
-        throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+        throw new FileStorageException("Desculpe! O nome do arquivo contém uma sequência de caminho inválida " + fileName);
       }
 
       var dbFile = new DBFile(fileName, file.getContentType(), file.getBytes());
 
       return dbFileRepository.save(dbFile);
     } catch (IOException ex) {
-      throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+      throw new FileStorageException("Não foi possível armazenar o arquivo " + fileName + ". Por favor, tente novamente!", ex);
     }
   }
 
   public DBFile getFile(String fileId) {
     return dbFileRepository.findById(fileId)
-        .orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
+        .orElseThrow(() -> new MyFileNotFoundException("Arquivo não encontrado com id " + fileId));
   }
 }
