@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulário de registro</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <form
+            action="#"
+            autocomplete="off"
+            class="form-signin"
+            method="post"
+            permissao="form"
+            th:action="@{/registration}"
+            th:object="${usuario}"
+    >
+        <h3 class="form-signin-heading">Registrar novo usuário</h3>
+
+        <div class="form-group">
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        placeholder="Nome do usuário"
+                        th:field="*{userName}"
+                        type="text"
+                />
+                <label
+                        class="has-error"
+                        th:errors="*{userName}"
+                        th:if="${#fields.hasErrors('userName')}"
+                ></label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        placeholder="Senha"
+                        th:field="*{senha}"
+                        type="password"
+                />
+                <label
+                        class="has-error"
+                        th:errors="*{senha}"
+                        th:if="${#fields.hasErrors('senha')}"
+                ></label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        placeholder="Email"
+                        th:field="*{email}"
+                        type="text"
+                />
+                <label
+                        class="has-error"
+                        th:errors="*{email}"
+                        th:if="${#fields.hasErrors('email')}"
+                ></label>
+            </div>
+        </div>
+
+        <h5 class="text-center"><span class="text-success" th:utext="${successMessage}"></h5>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Registrar usuário
+        </button>
+        <br/>
+        <h4 class="text-center"><a method="get" th:href="@{/}">Voltar para tela de Login</a></h4>
+    </form>
+
+</div>
+</body>
+</html>
