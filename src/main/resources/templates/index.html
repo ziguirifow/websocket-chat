@@ -2,73 +2,77 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0" name="viewport"/>
     <title>WebSocket Chat usando Spring</title>
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          referrerpolicy="no-referrer" rel="stylesheet"/>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet" />
-    <link href="/css/main.css" rel="stylesheet" />
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet"/>
+    <link href="/css/main.css" rel="stylesheet"/>
 </head>
 
 <body>
-    <div class="file-loading">
-        <form id="multipleUploadForm" name="multipleUploadForm">
-            <input class="file-input" hidden id="multipleFileUploadInput" multiple name="files" required type="file" />
+<div class="file-loading">
+    <form id="multipleUploadForm" name="multipleUploadForm">
+        <input class="file-input" hidden id="multipleFileUploadInput" multiple name="files" required type="file"/>
+    </form>
+</div>
+<noscript>
+    <h2>Desculpe! Seu navegador não suporta Javascript</h2>
+</noscript>
+
+<div class="container" id="username-page">
+    <div class="username-page-container" id="username-page">
+        <h1 class="form-signin-heading">
+            Coloque o nome que você deseja que seja exibido no chat!
+        </h1>
+        <form class="form-signin" id="usernameForm" name="usernameForm">
+            <div class="form-group">
+                <input autocomplete="off" class="form-control" id="name" placeholder="Nome" type="text"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Entre no chat!
+                </button>
+            </div>
         </form>
     </div>
-    <noscript>
-        <h2>Desculpe! Seu navegador não suporta Javascript</h2>
-    </noscript>
+</div>
 
-    <div id="username-page">
-        <div class="username-page-container">
-            <h1 class="title">
-                Coloque o nome que você deseja que seja exibido no chat!
-            </h1>
-            <form id="usernameForm" name="usernameForm">
-                <div class="form-group">
-                    <input autocomplete="off" class="form-control" id="name" placeholder="Nome" type="text" />
-                </div>
-                <div class="form-group">
-                    <button class="accent username-submit" type="submit">
-                        Entre no chat!
-                    </button>
-                </div>
-            </form>
+<div class="hidden" id="chat-page">
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chat Unip</h2>
+            <h2>
+                <a class="btn btn-primary" method="post" th:href="@{/logout}">Sair do Chat</a>
+            </h2>
         </div>
-    </div>
-
-    <div class="hidden" id="chat-page">
-        <div class="chat-container">
-            <div class="chat-header">
-                <h2>Chat Unip</h2>
-                <h2>
-                    <a class="btn btn-primary" method="post" th:href="@{/logout}">Sair do Chat</a>
-                </h2>
+        <div class="connecting">Conectando ...</div>
+        <ul id="messageArea"></ul>
+        <form id="messageForm" name="messageForm">
+            <div class="form-group">
+                <div class="input-group clearfix">
+                    <label for="multipleFileUploadInput"></label>
+                    <input autocomplete="off" class="form-control" id="message" placeholder="Digite uma mensagem..."
+                           type="text"/>
+                    <button class="btn btn-link" id="button-addon2" type="submit"><i
+                            class="fa fa-paper-plane"></i></button>
+                </div>
             </div>
-            <div class="connecting">Conectando ...</div>
-            <ul id="messageArea"></ul>
-            <form id="messageForm" name="messageForm">
-                <div class="form-group">
-                    <div class="input-group clearfix">
-                        <label for="multipleFileUploadInput"></label>
-                        <input autocomplete="off" class="form-control" id="message" placeholder="Digite uma mensagem..."
-                            type="text" />
-                        <button class="primary" type="submit">Enviar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        </form>
     </div>
+</div>
 
-    <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+<script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+<script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+<script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script src="/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/main.js"></script>
 
 </body>
 
